@@ -36,6 +36,11 @@ ball_speed_y = 3
 ball_x = width // 2 - ball_size // 2
 ball_y = height // 2 - ball_size // 2
 
+# Punteggio
+score1 = 0
+score2 = 0
+font = pygame.font.Font(None, 36)
+
 # genera clock per il framerate
 clock = pygame.time.Clock()
 
@@ -92,6 +97,21 @@ while running:
         ball_speed_x *= -1
         ball_x = width - paddle_width - ball_size
 
+    # Punteggio
+    if ball_x < 0:
+        score2 += 1
+        ball_x = width // 2 - ball_size // 2
+        ball_y = height // 2 - ball_size // 2
+        ball_speed_x *= -1
+        ball_speed_y *= -1
+
+    if ball_x + ball_size > width:
+        score1 += 1
+        ball_x = width // 2 - ball_size // 2
+        ball_y = height // 2 - ball_size // 2
+        ball_speed_x *= -1
+        ball_speed_y *= -1
+
 # disegna tutto
     screen.fill(BLACK)
 
@@ -101,6 +121,10 @@ while running:
     
 # Ball
     pygame.draw.circle(screen, WHITE, (ball_x + ball_size//2, ball_y + ball_size//2), ball_size//2)
+
+# Punteggio
+    score_display = font.render(f"{score1} - {score2}", True, WHITE)
+    screen.blit(score_display, (width//2 - 40, 20))
 
 # aggiorna il loop dello schermo
     pygame.display.flip()
