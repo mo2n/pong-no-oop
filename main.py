@@ -81,6 +81,17 @@ while running:
     if ball_y < 0 or ball_y + ball_size > height:
         ball_speed_y *= -1
 
+    # Collisioni con le paddle
+    if (ball_x < paddle_width and 
+        player1_pos <= ball_y <= player1_pos + paddle_height):
+        ball_speed_x *= -1
+        ball_x = paddle_width
+
+    if (ball_x + ball_size > width - paddle_width and
+        player2_pos <= ball_y <= player2_pos + paddle_height):
+        ball_speed_x *= -1
+        ball_x = width - paddle_width - ball_size
+
 # disegna tutto
     screen.fill(BLACK)
 
