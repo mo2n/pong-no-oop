@@ -53,6 +53,17 @@ while running:
     if keys[K_DOWN]:
         player2_pos += paddle_speed
 
+    # Limiti per le paddle
+    if player1_pos < 0:
+        player1_pos = 0
+    if player1_pos + paddle_height > height:
+        player1_pos = height - paddle_height
+        
+    if player2_pos < 0:
+        player2_pos = 0
+    if player2_pos + paddle_height > height:
+        player2_pos = height - paddle_height
+
 # disegna tutto
     screen.fill(BLACK)
 
