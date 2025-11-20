@@ -27,6 +27,15 @@ player2_pos = height // 2 - paddle_height // 2
 # velocita paddle
 paddle_speed = 5
 
+# Ball dimensioni e velocità
+ball_size = 8
+ball_speed_x = 3
+ball_speed_y = 3
+
+# Posizione iniziale ball
+ball_x = width // 2 - ball_size // 2
+ball_y = height // 2 - ball_size // 2
+
 # genera clock per il framerate
 clock = pygame.time.Clock()
 
@@ -64,12 +73,23 @@ while running:
     if player2_pos + paddle_height > height:
         player2_pos = height - paddle_height
 
+    # Logica della palla
+    ball_x += ball_speed_x
+    ball_y += ball_speed_y
+
+    # Collisioni con i bordi
+    if ball_y < 0 or ball_y + ball_size > height:
+        ball_speed_y *= -1
+
 # disegna tutto
     screen.fill(BLACK)
 
 # disegna paddle
     pygame.draw.rect(screen, WHITE, (0, player1_pos, paddle_width, paddle_height))
     pygame.draw.rect(screen, WHITE, (width - paddle_width, player2_pos, paddle_width, paddle_height))
+    
+# Ball
+    pygame.draw.circle(screen, WHITE, (ball_x + ball_size//2, ball_y + ball_size//2), ball_size//2)
 
 # aggiorna il loop dello schermo
     pygame.display.flip()
