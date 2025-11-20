@@ -52,22 +52,22 @@ while running:
         if event.type == QUIT:
             running = False
 
-    # input del giocatore
+# input del giocatore
     keys = pygame.key.get_pressed()
 
-    # paddle 1 tasti w+s
+# paddle 1 tasti w+s
     if keys[K_w]:
         player1_pos -= paddle_speed
     if keys[K_s]:
         player1_pos += paddle_speed
 
-    # paddle 2 tasti up+down
+# paddle 2 tasti up+down
     if keys[K_UP]:
         player2_pos -= paddle_speed
     if keys[K_DOWN]:
         player2_pos += paddle_speed
 
-    # Limiti per le paddle
+# Limiti per le paddle
     if player1_pos < 0:
         player1_pos = 0
     if player1_pos + paddle_height > height:
@@ -78,15 +78,15 @@ while running:
     if player2_pos + paddle_height > height:
         player2_pos = height - paddle_height
 
-    # Logica della palla
+# Logica della palla
     ball_x += ball_speed_x
     ball_y += ball_speed_y
 
-    # Collisioni con i bordi
+# Collisioni con i bordi
     if ball_y < 0 or ball_y + ball_size > height:
         ball_speed_y *= -1
 
-    # Collisioni con le paddle
+# Collisioni con le paddle
     if (ball_x < paddle_width and 
         player1_pos <= ball_y <= player1_pos + paddle_height):
         ball_speed_x *= -1
@@ -97,7 +97,7 @@ while running:
         ball_speed_x *= -1
         ball_x = width - paddle_width - ball_size
 
-    # Punteggio
+# Punteggio
     if ball_x < 0:
         score2 += 1
         ball_x = width // 2 - ball_size // 2
